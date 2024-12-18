@@ -1,0 +1,112 @@
+<div class="tm-block-col tm-col-account-settings" style="margin: auto; margin-top: 20px;">
+    <div class="tm-bg-primary-dark tm-block tm-block-settings">
+        <h2 class="tm-block-title">Add New Commune</h2>
+        <form action="" [formGroup]="addCommuneForm" (ngSubmit)="onSubmit()" class="tm-signup-form row">
+            <div class="form-group col-lg-6">
+                <label for="maXa">Mã xã</label>
+                <input id="maXa" name="maXa" type="text" class="form-control validate" formControlName="maXa" />
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="tenXa">Tên xã</label>
+                <input id="tenXa" name="tenXa" type="text" class="form-control validate" formControlName="tenXa" />
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="cap">Cấp</label>
+                <input id="cap" name="cap" type="text" class="form-control validate" formControlName="cap" />
+            </div>
+            <div class="form-group col-lg-6">
+                <div class="tm-bg-primary-dark">
+                    <label for="maTinh">Mã tỉnh</label>
+                    <select class="custom-select" formControlName="maTinh" (change)="onProvinceChange($event)">
+                        <option *ngFor="let p of provinceList" [value]="p.value">
+                            {{p.displayText}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <div class="tm-bg-primary-dark">
+                    <label for="maHuyen">Mã huyện</label>
+                    <select class="custom-select" formControlName="maHuyen">
+                        <option *ngFor="let p of districtList" [value]="p.value">
+                            {{p.displayText}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <div class="tm-bg-primary-dark">
+                    <label for="isActive">Active</label>
+                    <select class="custom-select" formControlName="isActive">
+                        <option value="1">
+                            True
+                        </option>
+                        <option value="0">
+                            False
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <div class="tm-bg-primary-dark">
+                    <label for="isXaNgheo">Xã nghèo</label>
+                    <select class="custom-select" formControlName="isXaNgheo">
+                        <option value="1">
+                            True
+                        </option>
+                        <option value="0">
+                            False
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <div class="tm-bg-primary-dark">
+                    <label for="isXaMienNui">Xã miền núi</label>
+                    <select class="custom-select" formControlName="isXaMienNui">
+                        <option value="1">
+                            True
+                        </option>
+                        <option value="0">
+                            False
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <div class="tm-bg-primary-dark">
+                    <label for="isXaDanToc">Xã dân tộc</label>
+                    <select class="custom-select" formControlName="isXaDanToc">
+                        <option value="1">
+                            True
+                        </option>
+                        <option value="0">
+                            False
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <div class="tm-bg-primary-dark">
+                    <label for="isThanhThi">Thành thị</label>
+                    <select class="custom-select" formControlName="isThanhThi">
+                        <option value="1">
+                            True
+                        </option>
+                        <option value="0">
+                            False
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="tm-hide-sm">&nbsp;</label>
+                <button type="submit" class="btn btn-primary btn-block text-uppercase">
+                    Add new commune
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,19 @@
+tr {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.input-group.mb-3 {
+  border: 1px solid grey !important;
+}
+
+.pageNumber {
+  margin: 20px;
+  color: white;
+}/*# sourceMappingURL=province.component.css.map */

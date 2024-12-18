@@ -1,0 +1,65 @@
+<div class="container">
+  <h2 class="title">MANAGEMENT PROVINCE</h2>
+  <form action="" [formGroup]="provinceForm" (ngSubmit)="onSubmit()" class="row">
+    <div class="col-lg-3">
+      <button type="button" class="btn btn-primary" routerLink="add-province">ADD NEW PROVINCE</button>
+    </div>
+    <div class="col-lg-4"></div>
+    <div class="form-group col-lg-5">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Tìm kiếm..." formControlName="filter">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-lg-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tên tỉnh</th>
+            <th scope="col">Mã tỉnh</th>
+            <th scope="col">Cấp</th>
+            <th scope="col">Vùng sinh thái</th>
+            <th scope="col">Vùng địa lý</th>
+            <th scope="col">Vùng miền</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of provinceList">
+            <th scope="row">{{data.id}}</th>
+            <td>{{data.tenTinh}}</td>
+            <td>{{data.maTinh}}</td>
+            <td>{{data.cap}}</td>
+            <td>{{data.strVungSinhThai == "" ? "X" : "O"}}</td>
+            <td>{{data.strVungDiaLy == "" ? "X" : "O"}}</td>
+            <td>{{data.strVungMien == "" ? "X" : "O"}}</td>
+            <td>
+              <a [routerLink]="'edit-province/' + data.id" class="tm-product-delete-link"
+                (click)="sendDataToLocalStorage()">
+                <i class="fas fa-cog tm-product-delete-icon"></i>
+              </a>
+            </td>
+            <td>
+              <a (click)="deleteProvince(data.id)" class="tm-product-delete-link">
+                <i class="far fa-trash-alt tm-product-delete-icon"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-group col-lg-12" style="text-align: center;">
+      <button type="button" class="btn btn-primary" (click)="first()">First</button>
+      <button type="button" class="btn btn-primary" (click)="prev()">Prev</button>
+      <span class="pageNumber">Page {{currentPage}}/{{pageCount}}</span>
+      <button type="button" class="btn btn-primary" (click)="next()">Next</button>
+      <button type="button" class="btn btn-primary" (click)="last()">Last</button>
+    </div>
+  </form>
+
+</div>

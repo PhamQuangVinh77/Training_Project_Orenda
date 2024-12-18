@@ -1,0 +1,79 @@
+<div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+      <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="tm-block-title d-inline-block">ADD PRODUCT</h2>
+            </div>
+          </div>
+          <div class="row tm-edit-product-row">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+              <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="tm-edit-product-form">
+                <div class="form-group mb-3">
+                  <label
+                    for="productName"
+                    >Product Name
+                  </label>
+                  <input
+                    id="productName"
+                    name="productName"
+                    type="text"
+                    class="form-control validate"
+                    formControlName="productName"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label
+                    for="groupId"
+                    >Category</label
+                  >
+                  <select
+                    class="custom-select tm-select-accounts"
+                    id="groupId"
+                    formControlName="groupId"
+                  >
+                    <option *ngFor="let c of listCategory" [value]="c.groupId">
+                      {{ c.groupName }}
+                    </option>
+                  </select>
+                </div>
+                <div class="row">
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                        <label
+                          for="expireDate"
+                          >Expire Date
+                        </label>
+                        <input
+                          id="expireDate"
+                          name="expireDate"
+                          type="date"
+                          class="form-control validate"
+                          data-large-mode="true"
+                          formControlName="expireDate"
+                        />
+                      </div>
+                      <div class="form-group mb-3 col-xs-12 col-sm-6">
+                        <label
+                          for="inStock"
+                          >Units In Stock
+                        </label>
+                        <input
+                          id="inStock"
+                          name="inStock"
+                          type="text"
+                          class="form-control validate"
+                          formControlName="inStock"
+                        />
+                      </div>
+                </div>
+                <div class="col-12" style="margin-top: 40px;">
+                  <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

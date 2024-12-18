@@ -1,0 +1,57 @@
+<div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+      <div class="col-12 mx-auto tm-login-col">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+          <div class="row">
+            <div class="col-12 text-center">
+              <h2 class="tm-block-title mb-4">Welcome to Login</h2>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <!-- action="index.html" method="post" -->
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="tm-login-form">
+                <div class="form-group">
+                  <label for="userName">Username</label>
+                  <input
+                    name="userName"
+                    type="text"
+                    class="form-control validate"
+                    id="userName"
+                    value=""
+                    formControlName="userName"
+                  />
+                </div>
+                <div class="form-group mt-3">
+                  <label for="password">Password</label>
+                  <input
+                    name="password"
+                    type="password"
+                    class="form-control validate"
+                    id="password"
+                    value=""
+                    formControlName="password"
+                  />
+                </div>
+                <div class="form-group mt-4">
+                  <button
+                    [disabled]="loginForm.invalid"
+                    type="submit"
+                    class="btn btn-primary btn-block text-uppercase"
+                  >
+                    Login
+                  </button>
+                </div>
+                <div class="form-group mt-5">
+                    <label for="register">Don't have an account?</label>
+                    <button class="btn btn-primary btn-block text-uppercase">
+                      Register now
+                    </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,35 @@
+<div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+      <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="tm-block-title d-inline-block">ADD CATEGORY</h2>
+            </div>
+          </div>
+          <div class="row tm-edit-product-row">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+              <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()" class="tm-edit-product-form">
+                <div class="form-group mb-3">
+                  <label
+                    for="categoryName"
+                    >Category Name
+                  </label>
+                  <input
+                    id="categoryName"
+                    name="categoryName"
+                    type="text"
+                    class="form-control validate"
+                    formControlName="categoryName"
+                  />
+                </div>
+                <div class="col-12" style="margin-top: 40px;">
+                  <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

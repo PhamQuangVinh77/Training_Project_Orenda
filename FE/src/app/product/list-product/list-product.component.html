@@ -1,0 +1,71 @@
+<div class="container mt-5">
+    <div class="row tm-content-row">
+      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+        <div class="tm-bg-primary-dark tm-block tm-block-products">
+          <h2 class="tm-block-title text-center">PRODUCTS</h2>
+          <div class="tm-product-table-container">
+            <table class="table table-hover tm-table-small tm-product-table">
+              <thead class="text-center">
+              <tr>
+                <th scope="col">PRODUCT NAME</th>
+                <th scope="col">UNIT SOLD</th>
+                <th scope="col">IN STOCK</th>
+                <th scope="col">EXPIRE DATE</th>
+                <th scope="col">EDIT</th>
+                <th scope="col">DELETE</th>
+              </tr>
+              </thead>
+              <tbody class="text-center">
+              <tr *ngFor="let data of productDataSource">
+                <td class="tm-product-name">{{data.productName}}</td>
+                <td>{{data.unitSold}}</td>
+                <td>{{data.inStock}}</td>
+                <td>{{data.expireDate.toString().split('T')[0]}}</td>
+                <td>
+                  <a [routerLink]="'edit-product/' + data.productCode" class="tm-product-delete-link">
+                    <i class="fas fa-cog tm-product-delete-icon"></i>
+                  </a>
+                </td>
+                <td>
+                  <a (click)="deleteProduct(data.productCode)" class="tm-product-delete-link">
+                    <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- table container -->
+          <a routerLink="add-product"
+            class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
+          <button class="btn btn-primary btn-block text-uppercase" (click)="deleteAllProduct()">
+            Delete all products
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+        <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+          <h2 class="tm-block-title text-center">PRODUCT CATEGORIES</h2>
+          <div class="tm-product-table-container">
+            <table class="table tm-table-small tm-product-table">
+              <tbody>
+              <tr *ngFor="let data of productGroupData">
+                <td class="tm-product-name">{{data.groupName}}</td>
+                <td class="text-center">
+                  <a (click)="deleteProductGroup(data.groupId)" class="tm-product-delete-link">
+                    <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- table container -->
+          <button routerLink="add-category" class="btn btn-primary btn-block text-uppercase mb-3">
+            Add new category
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

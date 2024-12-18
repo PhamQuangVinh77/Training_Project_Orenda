@@ -1,0 +1,83 @@
+<div class="container">
+    <h2 class="title">MANAGEMENT COMMUNE</h2>
+    <form action="" [formGroup]="communeForm" (ngSubmit)="onSubmit()" class="row">
+        <div class="col-lg-3">
+            <button type="button" class="btn btn-primary" routerLink="add-commune">ADD NEW COMMUNE</button>
+        </div>
+        <div class="col-lg-4"></div>
+        <div class="form-group col-lg-5">
+            <div class="select-group mb-3">
+                <select class="custom-select" formControlName="provinceCode" (change)="onProvinceChange($event)">
+                    <option value="" disabled selected hidden>--Tỉnh--</option>
+                    <option *ngFor="let p of provinceList" [value]="p.value">
+                        {{p.displayText}}
+                    </option>
+                </select>
+            </div>
+            <div class="select-group mb-3">
+                <select class="custom-select" formControlName="districtCode" (change)="onDistrictChange($event)">
+                    <option value="" disabled selected hidden>--Huyện--</option>
+                    <option *ngFor="let p of districtList" [value]="p.value">
+                        {{p.displayText}}
+                    </option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Tìm kiếm..." formControlName="filter">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tên xã</th>
+                        <th scope="col">Mã xã</th>
+                        <th scope="col">Cấp</th>
+                        <th scope="col">Xã nghèo</th>
+                        <th scope="col">Xã miền núi</th>
+                        <th scope="col">Xã dân tộc</th>
+                        <th scope="col">Thành thị</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of communeList">
+                        <th scope="row">{{data.id}}</th>
+                        <td>{{data.tenXa}}</td>
+                        <td>{{data.maXa}}</td>
+                        <td>{{data.cap}}</td>
+                        <td>{{data.isXaNgheo == false ? "X" : "O"}}</td>
+                        <td>{{data.isXaMienNui == false ? "X" : "O"}}</td>
+                        <td>{{data.isXaDanToc == false ? "X" : "O"}}</td>
+                        <td>{{data.isThanhThi == false ? "X" : "O"}}</td>
+                        <td>
+                            <a [routerLink]="'edit-commune/' + data.id" class="tm-product-delete-link"
+                                (click)="sendDataToLocalStorage()">
+                                <i class="fas fa-cog tm-product-delete-icon"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="deleteCommune(data.id)" class="tm-product-delete-link">
+                                <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group col-lg-12" style="text-align: center;">
+            <button type="button" class="btn btn-primary" (click)="first()">First</button>
+            <button type="button" class="btn btn-primary" (click)="prev()">Prev</button>
+            <span class="pageNumber">Page {{currentPage}}/{{pageCount}}</span>
+            <button type="button" class="btn btn-primary" (click)="next()">Next</button>
+            <button type="button" class="btn btn-primary" (click)="last()">Last</button>
+        </div>
+    </form>
+
+</div>
