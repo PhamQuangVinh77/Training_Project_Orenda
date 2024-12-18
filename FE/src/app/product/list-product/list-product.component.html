@@ -7,9 +7,10 @@
             <table class="table table-hover tm-table-small tm-product-table">
               <thead class="text-center">
               <tr>
+                <th scope="col">ID</th>
                 <th scope="col">PRODUCT NAME</th>
-                <th scope="col">UNIT SOLD</th>
-                <th scope="col">IN STOCK</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">QUANTITY</th>
                 <th scope="col">EXPIRE DATE</th>
                 <th scope="col">EDIT</th>
                 <th scope="col">DELETE</th>
@@ -17,17 +18,18 @@
               </thead>
               <tbody class="text-center">
               <tr *ngFor="let data of productDataSource">
-                <td class="tm-product-name">{{data.productName}}</td>
-                <td>{{data.unitSold}}</td>
-                <td>{{data.inStock}}</td>
-                <td>{{data.expireDate.toString().split('T')[0]}}</td>
+                <td>{{data.id}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.price}}</td>
+                <td>{{data.quantity}}</td>
+                <td>{{data.createdDate.toString().split('T')[0]}}</td>
                 <td>
-                  <a [routerLink]="'edit-product/' + data.productCode" class="tm-product-delete-link">
+                  <a [routerLink]="'edit-product/' + data.id" class="tm-product-delete-link">
                     <i class="fas fa-cog tm-product-delete-icon"></i>
                   </a>
                 </td>
                 <td>
-                  <a (click)="deleteProduct(data.productCode)" class="tm-product-delete-link">
+                  <a (click)="deleteProduct(data.id)" class="tm-product-delete-link">
                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                   </a>
                 </td>

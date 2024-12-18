@@ -5,6 +5,13 @@ export class ConstData{
     static GETACCOUNT: string = "http://test.nghiencuukhoahoc.com.vn/api/app/account/get-account-bootstrap";
     static UPDATEACCOUNT: string = "http://test.nghiencuukhoahoc.com.vn/api/app/account/update-account-info";
     static DEFAULTPASSWORD: string = "Orenda@123";
+
+    //Product
+    static PRODUCTS_URL: string = "http://localhost:5048/api/products";
+
+    //Product Group
+    static PRODUCT_GROUPS_URL: string = "http://localhost:5048/api/product-groups";
+    
     //Province
     static GETALLDATA: string = "http://test.nghiencuukhoahoc.com.vn/api/master-data/select-data-source/get-combo-data-source";
     static PAGGINGPROVINCE: string = "http://test.nghiencuukhoahoc.com.vn/api/master-data/tinh/get-list";

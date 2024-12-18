@@ -57,7 +57,7 @@ namespace DotNetTrainingProject.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = response});
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProduct([FromForm] int id)
         {

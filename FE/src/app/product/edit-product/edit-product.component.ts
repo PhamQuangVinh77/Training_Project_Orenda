@@ -22,27 +22,27 @@ export class EditProductComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    let code = this.activatedRoute.snapshot.params?.['id'];
-    let currentProduct = this.productService.getProductByCode(code);
-    this.editForm = this.fb.group({
-      productName: currentProduct?.productName,
-      groupId:currentProduct?.groupId,
-      expireDate:currentProduct?.expireDate.toString().split('T')[0],
-      inStock:currentProduct?.inStock,
-    })
+    // let code = this.activatedRoute.snapshot.params?.['id'];
+    // let currentProduct = this.productService.getProductByCode(code);
+    // this.editForm = this.fb.group({
+    //   productName: currentProduct?.productName,
+    //   groupId:currentProduct?.groupId,
+    //   expireDate:currentProduct?.expireDate.toString().split('T')[0],
+    //   inStock:currentProduct?.inStock,
+    // })
   }
 
   onSubmit(){
-    let value = this.editForm.value;
-    let updateProduct: ProductDto = {
-      productName: value.productName,
-      productCode: this.activatedRoute.snapshot.params?.['id'],
-      expireDate: value.expireDate,
-      unitSold: 0,
-      inStock: value.inStock,
-      groupId: value.groupId
-    }
-    this.productService.updateProduct(updateProduct);
-    window.history.back();
+    // let value = this.editForm.value;
+    // let updateProduct: ProductDto = {
+    //   productName: value.productName,
+    //   productCode: this.activatedRoute.snapshot.params?.['id'],
+    //   expireDate: value.expireDate,
+    //   unitSold: 0,
+    //   inStock: value.inStock,
+    //   groupId: value.groupId
+    // }
+    // this.productService.updateProduct(updateProduct);
+    // window.history.back();
   }
 }

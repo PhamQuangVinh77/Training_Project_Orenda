@@ -9,34 +9,49 @@ import { LocalStorageService } from '../../services/local-storage.service';
   templateUrl: './list-product.component.html',
   styleUrl: './list-product.component.scss'
 })
-export class ListProductComponent implements OnInit{
+export class ListProductComponent implements OnInit {
   productKey = "products";
   categoryKey = "categories";
-  productDataSource : ProductDto[] = [];
-  productGroupData : ProductGroupDTO[] = [];
-  constructor(private productService : ProductService, private lsService : LocalStorageService){}
+  productDataSource: any[] = [];
+  productGroupData: ProductGroupDTO[] = [];
+  constructor(private productService: ProductService, private lsService: LocalStorageService) { }
   ngOnInit(): void {
-    let storedProducts = this.lsService.getDataLocalStorage(this.productKey);
+    this.loadData();
     let storedCategories = this.lsService.getDataLocalStorage(this.categoryKey);
-    if (storedProducts) {
-      this.productDataSource = storedProducts;
-    }
-    if(storedCategories){
+    if (storedCategories) {
       this.productGroupData = storedCategories;
     }
   }
 
-  deleteProduct(productCode:string){
-    this.productService.deleteProduct(productCode);
-    this.ngOnInit();
+  loadData() {
+    this.productService.getAllProducts().subscribe({
+      next: (data: any) => {
+        this.productDataSource = data;
+        console.log(data);
+      }
+    })
   }
 
-  deleteAllProduct(){
-    this.productService.deleteAllProduct();
-    this.ngOnInit();
+  deleteProduct(productId: number) {
+    this.productService.deleteProduct(productId).subscribe(
+      (response: any) => {
+        console.log('Response from API:', response);
+        alert(response.message);
+        this.ngOnInit();
+      },
+      (err: any) => {
+        console.error('Error from API:', err);
+        alert(err.error.message);
+      }
+    );
   }
 
-  deleteProductGroup(groupId: string){
+  deleteAllProduct() {
+    // this.productService.deleteAllProduct();
+    // this.ngOnInit();
+  }
+
+  deleteProductGroup(groupId: string) {
     this.productService.deleteProductGroup(groupId);
     this.ngOnInit();
   }
