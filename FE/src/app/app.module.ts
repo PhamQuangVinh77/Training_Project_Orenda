@@ -7,8 +7,9 @@ import { LayoutModule } from './layout/layout.module';
 import { ProductModule } from './product/product.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AccountModule } from './account/account.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ManagementModule } from './management/management.module';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,12 @@ import { ManagementModule } from './management/management.module';
     ManagementModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

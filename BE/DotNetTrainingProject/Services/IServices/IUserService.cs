@@ -6,5 +6,6 @@ namespace DotNetTrainingProject.Services.IServices
     {
         Task<string> Register(RequestForRegister request);
         Task<string> Login(RequestForLogin request);
+        string CheckToken(string userName, string token);
     }
 }

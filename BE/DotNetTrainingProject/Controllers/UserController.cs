@@ -36,7 +36,7 @@ namespace DotNetTrainingProject.Controllers
             var result = await _userService.Login(request);
             if (String.IsNullOrEmpty(result))
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Username or password is invalid!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Username or password is invalid! Please try again!" });
             }
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = result });
         }
@@ -61,6 +61,17 @@ namespace DotNetTrainingProject.Controllers
                 return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Password has been changed!" });
             }
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = result });
+        }
+
+        [HttpPost("secure-data")]
+        public IActionResult SecureData([FromBody]RequestForSecureData request)
+        {
+            var result = _userService.CheckToken(request.Username, request.Token);
+            if (String.IsNullOrEmpty(result))
+            {
+                return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Succes" });
+            }
+            return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = result });
         }
     }
 }

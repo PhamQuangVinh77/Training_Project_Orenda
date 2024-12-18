@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { loginGuard } from './authentication/guards/login.guard';
+import { LoginGuard } from './authentication/guards/login.guard';
 
 const routes: Routes = [
   {
@@ -15,17 +15,17 @@ const routes: Routes = [
   {
     path: 'management', 
     loadChildren: () => import('./management/management.module').then((m) => m.ManagementModule),
-    canActivate: [loginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'products', 
     loadChildren: () => import('./product/product.module').then((m) => m.ProductModule),
-    canActivate: [loginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'accounts',
     loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),
-    canActivate: [loginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'login',

@@ -1,7 +1,7 @@
 export class ConstData{
     //Account
-    static LOGIN: string= "http://test.nghiencuukhoahoc.com.vn/api/app/account/login";
-    static LOGOUT: string= "http://test.nghiencuukhoahoc.com.vn/api/app/account/logout";
+    static SECUREDATA: string = "http://localhost:5048/api/users/secure-data";
+    static LOGIN: string= "http://localhost:5048/api/users/login";
     static GETACCOUNT: string = "http://test.nghiencuukhoahoc.com.vn/api/app/account/get-account-bootstrap";
     static UPDATEACCOUNT: string = "http://test.nghiencuukhoahoc.com.vn/api/app/account/update-account-info";
     static DEFAULTPASSWORD: string = "Orenda@123";
@@ -27,4 +27,5 @@ export class ConstData{
     static USERSKEY : string = "userDataSource";
     static ACCESSTOKEN : string = "token";
     static LISTDATA: string = "list-data";
+    static CURRENTUSER: string = "current-user";
 }

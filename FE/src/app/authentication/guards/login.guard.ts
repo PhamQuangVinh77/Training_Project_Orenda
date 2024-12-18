@@ -1,18 +1,15 @@
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { ConstData } from '../../Dto/ConstData';
+import { inject } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
-export const loginGuard: 
+export const LoginGuard:
   CanActivateFn = (
-    route: ActivatedRouteSnapshot, 
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ) : Observable<boolean>=>{ 
-    let router : Router = new Router();
-    let key = ConstData.ACCESSTOKEN;
-    let token = localStorage.getItem(key);
-    if(!token){
-      router.navigate(['/login']);
-      return of(false); 
-    }
-    return of(true); 
+  ): Observable<boolean> => {
+    let service = inject(UserService);
+    let result = service.checkToken();
+    return of(result);
   };
+

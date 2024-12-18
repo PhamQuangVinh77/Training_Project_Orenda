@@ -2,10 +2,12 @@
 using DotNetTrainingProject.Models.Requests;
 using DotNetTrainingProject.Services.IServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using static System.Net.WebRequestMethods;
 
 namespace DotNetTrainingProject.Services
 {
@@ -16,14 +18,16 @@ namespace DotNetTrainingProject.Services
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _config;
         private readonly ILogger<UserService> _logger;
+        private readonly IMemoryCache _memoryCache;
         public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, 
-            IConfiguration config, ILogger<UserService> logger)
+            IConfiguration config, ILogger<UserService> logger, IMemoryCache memoryCache)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _config = config;
             _logger = logger;
+            _memoryCache = memoryCache;
         }
 
         public async Task<string> Register(RequestForRegister request)
@@ -98,16 +102,41 @@ namespace DotNetTrainingProject.Services
                 var token = new JwtSecurityToken(
                         issuer: _config["JWT:ValidIssuer"],
                         audience: _config["JWT:ValidAudience"],
-                        expires: DateTime.Now.AddMinutes(30),
+                        expires: DateTime.Now.AddMinutes(Convert.ToDouble(_config["JWT:ExpireTime"])),
                         claims: authClaims,
                         signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha256Signature)
                     );
+                SaveTokenInCache(request.UserName, new JwtSecurityTokenHandler().WriteToken(token));
                 return new JwtSecurityTokenHandler().WriteToken(token);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 return String.Empty;
+            }
+        }
+
+        private void SaveTokenInCache(string userName, string token)
+        {
+            var key = "token_" + userName;
+            var expireTime = TimeSpan.FromMinutes(30);
+            _memoryCache.Set(key, token, expireTime);
+        }
+
+        public string CheckToken(string userName, string token)
+        {
+            try
+            {
+                var key = "token_" + userName;
+                if (_memoryCache.TryGetValue(key, out string cacheToken) && cacheToken == token)
+                {
+                    return String.Empty;
+                }
+                return "You need to login to use this feature!";
+            }
+            catch (Exception ex) {
+                _logger.LogError(ex.Message);
+                return "You need to login to use this feature!";
             }
         }
     }
