@@ -1,6 +1,7 @@
 ﻿using DotNetTrainingProject.DbContexts;
 using DotNetTrainingProject.Entities;
 using DotNetTrainingProject.MailUtilities;
+using DotNetTrainingProject.Middlewares;
 using DotNetTrainingProject.Services;
 using DotNetTrainingProject.Services.IServices;
 using DotNetTrainingProject.UnitOfWorks;
@@ -77,6 +78,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowSpecificOrigins"); // Use CORS
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<AuthorizeMiddleware>(); // Add to using custom middleware
 
 app.UseAuthorization();
 
