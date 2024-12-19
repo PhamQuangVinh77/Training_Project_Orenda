@@ -25,7 +25,7 @@ namespace DotNetTrainingProject.Controllers
             return listResponse;
         }
 
-        [HttpGet("{id}")]
+        [HttpPost("{id}")]
         [Authorize]
         public async Task<Product> GetProductById([FromForm] int id)
         {
@@ -57,7 +57,7 @@ namespace DotNetTrainingProject.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = response});
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("delete/{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProduct([FromForm] int id)
         {

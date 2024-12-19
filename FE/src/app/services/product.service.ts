@@ -79,44 +79,48 @@ export class ProductService implements OnInit {
 
     defaultListGroupProduct: ProductGroupDTO[] = [
         {
-            groupId: "9",
-            groupName: "Striker"
-        },
-        {
-            groupId: "7",
-            groupName: "Left Winger"
-        },
-        {
-            groupId: "11",
-            groupName: "Right Winger"
-        },
-        {
-            groupId: "10",
-            groupName: "Centre Attack Middlefield"
-        },
-        {
-            groupId: "8",
-            groupName: "Centre Middlefield"
-        },
-        {
-            groupId: "6",
-            groupName: "Centre Defender Middlefield"
+            groupId: "2",
+            groupName: "ST"
         },
         {
             groupId: "4",
-            groupName: "Centre Back"
+            groupName: "CF"
         },
         {
-            groupId: "2",
-            groupName: "Right Back"
+            groupId: "5",
+            groupName: "LW"
         },
         {
-            groupId: "3",
-            groupName: "Left Back"
+            groupId: "6",
+            groupName: "RW"
         },
         {
-            groupId: "1",
-            groupName: "Goalkeeper"
+            groupId: "7",
+            groupName: "CAM"
+        },
+        {
+            groupId: "8",
+            groupName: "CM"
+        },
+        {
+            groupId: "9",
+            groupName: "CDM"
+        },
+        {
+            groupId: "10",
+            groupName: "CB"
+        },
+        {
+            groupId: "11",
+            groupName: "LB"
+        },
+        {
+            groupId: "14",
+            groupName: "RB"
+        },
+        {
+            groupId: "15",
+            groupName: "GK"
         }
     ]
 
@@ -150,8 +154,17 @@ export class ProductService implements OnInit {
         return this.httpClient.get<any[]>(url, { headers });
     }
 
-    deleteProduct(productId: number) {
+    getProductById(productId: number) {
         let url = ConstData.PRODUCTS_URL + "/" + String(productId);
+        let body = new HttpParams().set('id', productId);
+        let headers = new HttpHeaders({
+            "Content-Type": "application/x-www-form-urlencoded",
+        });
+        return this.httpClient.post<any>(url, body.toString(), { headers } );
+    }
+
+    deleteProduct(productId: number) {
+        let url = ConstData.PRODUCTS_URL + "/delete/" + String(productId);
         let body = new HttpParams().set('id', productId);
         let headers = new HttpHeaders({
             "Content-Type": "application/x-www-form-urlencoded",
@@ -167,6 +180,15 @@ export class ProductService implements OnInit {
         });
         return this.httpClient.post<any>(url, data, { headers });
     }
+
+    updateProduct(id: number, name: string, price: number, quantity: number, productGroupId: number) {
+        let url = ConstData.PRODUCTS_URL + "/" + String(id);
+        let data = { "id": id, "name": name, "price": price, "quantity": quantity, "productGroupId": productGroupId };
+        let headers = new HttpHeaders({
+            "Content-Type": "application/json",
+        });
+        return this.httpClient.put<any>(url, data, { headers });
+    }
     // addProduct(newProduct: ProductDto) {
     //     this.listProduct.push(newProduct);
     //     this.service.setDataLocalStorage(this.productKey, this.listProduct);
@@ -180,19 +202,6 @@ export class ProductService implements OnInit {
     // deleteAllProduct() {
     //     this.listProduct = [];
     //     this.service.setDataLocalStorage(this.productKey, this.listProduct);
-    // }
-
-    // updateProduct(updateProduct: ProductDto) {
-    //     let productIndex = this.listProduct.findIndex(p => p.productCode === updateProduct.productCode);
-    //     this.listProduct[productIndex].productName = updateProduct.productName;
-    //     this.listProduct[productIndex].inStock = updateProduct.inStock;
-    //     this.listProduct[productIndex].expireDate = updateProduct.expireDate;
-    //     this.listProduct[productIndex].groupId = updateProduct.groupId;
-    //     this.service.setDataLocalStorage(this.productKey, this.listProduct);
-    // }
-
-    // getProductByCode(productCode: string) {
-    //     return this.listProduct.find(p => p.productCode === productCode);
     // }
 
     addProductGroup(category: ProductGroupDTO) {
