@@ -81,6 +81,8 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<AuthorizeMiddleware>(); // Add to using custom middleware
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();

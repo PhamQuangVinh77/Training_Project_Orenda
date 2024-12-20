@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using DotNetTrainingProject.Models.Responses;
-using MySqlX.XDevAPI.Common;
 
 namespace DotNetTrainingProject.Middlewares
 {
@@ -21,14 +20,12 @@ namespace DotNetTrainingProject.Middlewares
             if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
             {
                 var response = new Response { Status = "Error", Message = "Only Admin can use this feature!" };
-                var responseJson = JsonSerializer.Serialize(response);
-                context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(responseJson);
-            }
-            else if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
-            {
-                var response = new Response { Status = "Error", Message = "You need to login to use this feature!" };
-                var responseJson = JsonSerializer.Serialize(response);
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Sử dụng camelCase
+                    WriteIndented = true // Tùy chọn: Định dạng đẹp
+                };
+                var responseJson = JsonSerializer.Serialize(response, options);
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(responseJson);
             }

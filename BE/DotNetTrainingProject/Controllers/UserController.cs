@@ -69,7 +69,7 @@ namespace DotNetTrainingProject.Controllers
             var result = _userService.CheckToken(request.Username, request.Token);
             if (String.IsNullOrEmpty(result))
             {
-                return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Succes" });
+                return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Secure data successfully!" });
             }
             return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = result });
         }
